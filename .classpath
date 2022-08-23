@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/cloudsim-examples-3.0.3-sources.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/cloudsim-examples-3.0.3.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/cloudsim-3.0.3-sources.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/cloudsim-3.0.3.jar"/>
+	<classpathentry kind="lib" path="/home/saas/Workspace-ips/mobility-effect-fog-ips/jars/commons-math3-3.5/commons-math3-3.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
