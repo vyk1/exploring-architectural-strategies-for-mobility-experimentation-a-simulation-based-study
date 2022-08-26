@@ -53,11 +53,13 @@ public class IPA_Mobility_6Modules {
     
     static int CLOUD_USERS = 1;
     static double SENSOR_TRANSMISSION_TIME = 10;
-    static int numberOfMobileUser = 50;
+    static int numberOfMobileUser = 25;
+//    static int numberOfMobileUser = 15;
+//    static int numberOfMobileUser = 5;
 
     // if random mobility generator for users is True, new random dataset will be created for each user
-    static boolean randomMobility_generator = true; // To use random datasets
-    static boolean renewDataset = true; // To overwrite existing random datasets
+    static boolean randomMobility_generator = false; // To use random datasets
+    static boolean renewDataset = false; // To overwrite existing random datasets
 
     public static void main(String[] args) {
 

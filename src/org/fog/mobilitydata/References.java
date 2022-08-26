@@ -13,16 +13,18 @@ public class References {
 
 	// Reference geographical information to create random mobility pattern for
 	// mobile users
-	public static final double[] north_reference = {-27.6004, -48.51828};
-	
-	public static final double[] south_reference = {-27.60052, -48.5183};
+	public static final double[] north_reference = { -27.6004, -48.51828 };
 
-	public static final String output_path_data = String.format(".%sdataset%soutput_path_data.csv", File.separator, File.separator);
+	public static final double[] south_reference = { -27.60052, -48.5183 };
+
+	public static final String output_path_data = String.format(".%sdataset%soutput_path_data.csv", File.separator,
+			File.separator);
 	// Reference dataset filename to store and retrieve users positions
 //	public static final String dataset_reference = String.format(".%sdataset%slocation%sstatic%susersLocation_", File.separator, File.separator, File.separator,
 //			File.separator);
-	public static final String dataset_reference = String.format(".%sdataset%sresults%srandom%s1%srandom_usersLocation-melbCBD_",
-			File.separator, File.separator, File.separator, File.separator, File.separator);
+	public static final String dataset_reference = String.format(
+			".%sdataset%sofficial%seas%srandom_usersLocation-melbCBD_", File.separator, File.separator, File.separator,
+			File.separator);
 	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_",
 			File.separator, File.separator);
 	public static final int random_walk_mobility_model = 1;
