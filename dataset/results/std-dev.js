@@ -6,7 +6,8 @@ const fs = require('fs');
 //joining path of directory 
 //const dirPath = "25-users/clustered"
 //const directoryPath = path.join(__dirname, dirPath);
-const directoryPath = "./25-users/clustered"
+const directoryPath = "./25-users/edgeward"
+//const directoryPath = "./25-users/clustered"
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function(err, files) {
 	//handling error
@@ -20,6 +21,11 @@ fs.readdir(directoryPath, function(err, files) {
 		readCsvFile(fullPath)
 	});
 });
+
+function twoDecimal(num) {
+	return Math.round((num + Number.EPSILON) * 100) / 100
+	//return num
+}
 
 function dev(arr) {
 	// Creating the mean with Array.reduce
@@ -39,7 +45,7 @@ function dev(arr) {
 	let variance = sum / arr.length
 
 	// Returning the Standered deviation
-	return [mean, Math.sqrt(sum / arr.length)]
+	return [twoDecimal(mean), twoDecimal(Math.sqrt(sum / arr.length))]
 }
 
 function readCsvFile(filename) {
