@@ -67,7 +67,6 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
 		super.init(monitored);
 	}
 
-
 	@Override
 	protected void init() {
 		// kept empty as locator should be set before init functions.
@@ -103,12 +102,11 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
 			processMobility(ev);
 			break;
 		case FogEvents.STOP_SIMULATION:
-			 CloudSim.stopSimulation();
-             printTimeDetails();
-//             printPowerDetails();
-//             printCostDetails();
-             printNetworkUsageDetails();
-             printMigrationDelayDetails();
+			CloudSim.stopSimulation();
+			printTimeDetails();
+			printCostDetails();
+			printNetworkUsageDetails();
+			printMigrationDelayDetails();
 			try {
 				printData();
 			} catch (IOException e) {
@@ -121,7 +119,7 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
 	}
 
 	private void printMigrationDelayDetails() {
-    	str.append(MigrationDelayMonitor.getMigrationDelay());
+		str.append(MigrationDelayMonitor.getMigrationDelay());
 		System.out.println("Total time required for module migration = " + MigrationDelayMonitor.getMigrationDelay());
 	}
 
