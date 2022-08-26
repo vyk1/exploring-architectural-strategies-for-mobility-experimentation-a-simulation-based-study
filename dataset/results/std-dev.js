@@ -4,10 +4,9 @@
 const path = require('path');
 const fs = require('fs');
 //joining path of directory 
-//const dirPath = "25-users/clustered"
 //const directoryPath = path.join(__dirname, dirPath);
-const directoryPath = "./25-users/edgeward"
-//const directoryPath = "./25-users/clustered"
+const directoryPath = "25-users/clustered"
+//const directoryPath = "./25-users/edgeward"
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function(err, files) {
 	//handling error
@@ -77,7 +76,7 @@ function readCsvFile(filename) {
 
 		let str = filename + " " + devA[0] + " " + devA[1] + devC[0] + " " + devC[1] + devN[0] + " " + devN[1] + devM[0] + " " + devM[1] + "\n"
 
-		fs.appendFileSync("output-std.csv", str)
+		fs.appendFileSync("output-std-cl.csv", str)
 
 	});
 }
