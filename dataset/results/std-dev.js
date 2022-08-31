@@ -76,7 +76,7 @@ function readCsvFile(filename) {
 
 		let str = filename + " " + devA[0] + " " + devA[1] + devC[0] + " " + devC[1] + devN[0] + " " + devN[1] + devM[0] + " " + devM[1] + "\n"
 
-		fs.appendFileSync("output-std-cl.csv", str)
+		fs.appendFileSync(directoryPath + ".csv", str)
 
 	});
 }
