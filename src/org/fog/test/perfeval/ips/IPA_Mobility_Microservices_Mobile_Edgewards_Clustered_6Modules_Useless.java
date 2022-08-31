@@ -1,5 +1,8 @@
 package org.fog.test.perfeval.ips;
 
+/**
+ * Based on CHM - No Microservices
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,55 +28,36 @@ import org.fog.entities.Actuator;
 import org.fog.entities.FogBroker;
 import org.fog.entities.FogDevice;
 import org.fog.entities.FogDeviceCharacteristics;
-import org.fog.entities.MicroserviceFogDevice;
-import org.fog.entities.PlacementRequest;
 import org.fog.entities.Sensor;
 import org.fog.entities.Tuple;
 import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
+import org.fog.placement.ClusteringController;
 import org.fog.placement.LocationHandler;
-import org.fog.placement.MicroservicesMobilityClusteringController;
-import org.fog.placement.PlacementLogicFactory;
+import org.fog.placement.ModuleMapping;
+import org.fog.placement.ModulePlacementMobileEdgewardsCluster;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
+import org.fog.utils.Config;
 import org.fog.utils.FogLinearPowerModel;
 import org.fog.utils.FogUtils;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
 import org.json.simple.parser.ParseException;
 
-/**
- * Simulation setup for Microservices Application
- * This test covers featured such as,
- * 1. creation of clusters among fog nodes
- * 2. horizontally scaling microservices (instead of vertical scaling) and load balancing among them
- * 3. routing based on destination device id using service discovery.
- * 4. heterogeneity of device resources.
- *
- * @author Samodha Pallewatta
- */
-
-/**
- * Config properties SIMULATION_MODE -> dynamic or static PR_PROCESSING_MODE ->
- * PERIODIC ENABLE_RESOURCE_DATA_SHARING -> false (not needed as FONs placed at
- * the highest level. DYNAMIC_CLUSTERING -> true (for clustered) and false (for
- * not clustered) * (also compatible with static clustering)
- */
-public class IPA_Mobility_Microservices_Clustered_6Modules {
+public class IPA_Mobility_Microservices_Mobile_Edgewards_Clustered_6Modules_Useless {
 	static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
 	static List<Sensor> sensors = new ArrayList<Sensor>();
 	static List<Actuator> actuators = new ArrayList<Actuator>();
 	static Map<Integer, Integer> userMobilityPattern = new HashMap<Integer, Integer>();
 	static LocationHandler locator;
 
-	static boolean CLOUD = false;
 	static int CLOUD_USERS = 1;
 	static double SENSOR_TRANSMISSION_TIME = 10;
+//    static int numberOfMobileUser = 25;
+//    static int numberOfMobileUser = 15;
 	static int numberOfMobileUser = 5;
-//  static int numberOfMobileUser = 15;
-//  static int numberOfMobileUser = 5;
-	static Double clusterLatency = 2.0; // cluster link latency 2ms
 
 	// if random mobility generator for users is True, new random dataset will be
 	// created for each user
@@ -108,39 +92,32 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 				createRandomMobilityDatasets(References.random_walk_mobility_model, datasetReference, renewDataset);
 			}
 
-			createMobileUser(broker.getId(), application, datasetReference);
-			createFogDevices(broker.getId(), application);
+			createMobileUser(broker.getId(), appId, datasetReference);
+			createFogDevices(broker.getId(), appId);
 
-			List<Integer> clusterLevelIdentifier = new ArrayList<>();
-			clusterLevelIdentifier.add(2);
+			ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
 
-			List<Application> appList = new ArrayList<>();
-			appList.add(application);
+			moduleMapping.addModuleToDevice("database", "cloud");
 
-			int placementAlgo = PlacementLogicFactory.CLUSTERED_MICROSERVICES_PLACEMENT;
-			MicroservicesMobilityClusteringController microservicesController = new MicroservicesMobilityClusteringController(
-					"controller", fogDevices, sensors, appList, clusterLevelIdentifier, clusterLatency, placementAlgo,
-					locator);
-
-			// generate placement requests
-			List<PlacementRequest> placementRequests = new ArrayList<>();
-			for (Sensor s : sensors) {
-				Map<String, Integer> placedMicroservicesMap = new HashMap<>();
-				placedMicroservicesMap.put("clientModule", s.getGatewayDeviceId());
-				PlacementRequest p = new PlacementRequest(s.getAppId(), s.getId(), s.getGatewayDeviceId(),
-						placedMicroservicesMap);
-				placementRequests.add(p);
+			ClusteringController controller;
+			if (false) {
+				clusteringLevels.add(2);
+				controller = new ClusteringController("master-controller", fogDevices, sensors, actuators, locator,
+						clusteringLevels);
+			} else {
+				controller = new ClusteringController("master-controller", fogDevices, sensors, actuators, locator,
+						clusteringLevels);
 			}
-
-			microservicesController.submitPlacementRequests(placementRequests, 1);
-
+			Boolean clusteringFeature = true;
+			controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewardsCluster(fogDevices, sensors,
+					actuators, application, moduleMapping, clusteringFeature)));
 			TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
 
 			CloudSim.startSimulation();
 
 			CloudSim.stopSimulation();
 
-			Log.printLine("CHM app finished!");
+			Log.printLine(appId + " finished!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.printLine("Unwanted errors happen");
@@ -156,55 +133,7 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 		}
 	}
 
-	/**
-	 * Creates the fog devices in the physical topology of the simulation.
-	 *
-	 * @param userId
-	 */
-	private static void createFogDevices(int userId, Application app) throws NumberFormatException, IOException {
-
-		locator.parseResourceInfo();
-
-		if (locator.getLevelWiseResources(locator.getLevelID("Cloud")).size() == 1) {
-
-			FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0.01, 16 * 103, 16 * 83.25,
-					MicroserviceFogDevice.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with
-													// level=0
-			cloud.setParentId(References.NOT_SET);
-			locator.linkDataWithInstance(cloud.getId(),
-					locator.getLevelWiseResources(locator.getLevelID("Cloud")).get(0));
-			cloud.setLevel(0);
-			fogDevices.add(cloud);
-
-			for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Proxy")).size(); i++) {
-
-				FogDevice proxy = createFogDevice("proxy-server_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333,
-						MicroserviceFogDevice.FON); // creates the fog device Proxy Server (level=1)
-				locator.linkDataWithInstance(proxy.getId(),
-						locator.getLevelWiseResources(locator.getLevelID("Proxy")).get(i));
-				proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
-				proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
-				proxy.setLevel(1);
-				fogDevices.add(proxy);
-
-			}
-
-			for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Gateway")).size(); i++) {
-
-				FogDevice gateway = createFogDevice("gateway_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333,
-						MicroserviceFogDevice.FCN);
-				locator.linkDataWithInstance(gateway.getId(),
-						locator.getLevelWiseResources(locator.getLevelID("Gateway")).get(i));
-				gateway.setParentId(locator.determineParent(gateway.getId(), References.SETUP_TIME));
-				gateway.setUplinkLatency(4);
-				gateway.setLevel(2);
-				fogDevices.add(gateway);
-			}
-
-		}
-	}
-
-	private static void createMobileUser(int userId, Application app, String datasetReference) throws IOException {
+	private static void createMobileUser(int userId, String appId, String datasetReference) throws IOException {
 
 		for (int id = 1; id <= numberOfMobileUser; id++)
 			userMobilityPattern.put(id, References.DIRECTIONAL_MOBILITY);
@@ -214,7 +143,7 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 		List<String> mobileUserDataIds = locator.getMobileUserDataId();
 
 		for (int i = 0; i < numberOfMobileUser; i++) {
-			FogDevice mobile = addMobile("mobile_" + i, userId, app, References.NOT_SET); // adding mobiles to the
+			FogDevice mobile = addMobile("mobile_" + i, userId, appId, References.NOT_SET); // adding mobiles to the
 																							// physical topology.
 																							// Smartphones have been
 																							// modeled as fog devices as
@@ -229,6 +158,90 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 	}
 
 	/**
+	 * Creates the fog devices in the physical topology of the simulation.
+	 *
+	 * @param userId
+	 * @param appId
+	 * @throws IOException
+	 * @throws NumberFormatException
+	 */
+	private static void createFogDevices(int userId, String appId) throws NumberFormatException, IOException {
+
+		locator.parseResourceInfo();
+
+		if (locator.getLevelWiseResources(locator.getLevelID("Cloud")).size() == 1) {
+
+			FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0.01, 16 * 103, 16 * 83.25); // creates
+																												// the
+																												// fog
+																												// device
+																												// Cloud
+																												// at
+																												// the
+																												// apex
+																												// of
+																												// the
+																												// hierarchy
+																												// with
+																												// level=0
+			cloud.setParentId(References.NOT_SET);
+			locator.linkDataWithInstance(cloud.getId(),
+					locator.getLevelWiseResources(locator.getLevelID("Cloud")).get(0));
+			cloud.setLevel(0);
+			fogDevices.add(cloud);
+
+			for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Proxy")).size(); i++) {
+
+				FogDevice proxy = createFogDevice("proxy-server_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333); // creates
+																															// the
+																															// fog
+																															// device
+																															// Proxy
+																															// Server
+																															// (level=1)
+				locator.linkDataWithInstance(proxy.getId(),
+						locator.getLevelWiseResources(locator.getLevelID("Proxy")).get(i));
+				proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
+				proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
+				proxy.setLevel(1);
+				fogDevices.add(proxy);
+
+			}
+
+			for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Gateway")).size(); i++) {
+
+				FogDevice gateway = createFogDevice("gateway_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333);
+				locator.linkDataWithInstance(gateway.getId(),
+						locator.getLevelWiseResources(locator.getLevelID("Gateway")).get(i));
+				gateway.setParentId(locator.determineParent(gateway.getId(), References.SETUP_TIME));
+				gateway.setUplinkLatency(4);
+				gateway.setLevel(2);
+				fogDevices.add(gateway);
+			}
+
+		}
+
+	}
+
+	private static FogDevice addMobile(String name, int userId, String appId, int parentId) {
+		FogDevice mobile = createFogDevice(name, 200, 2048, 10000, 270, 0, 87.53, 82.44);
+		mobile.setParentId(parentId);
+		// locator.setInitialLocation(name,drone.getId());
+		Sensor mobileSensor = new Sensor("sensor-" + name, "SENSOR", userId, appId,
+				new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor
+																			// follows a deterministic distribution
+		sensors.add(mobileSensor);
+		Actuator mobileDisplay = new Actuator("actuator-" + name, userId, appId, "DISPLAY");
+		actuators.add(mobileDisplay);
+		mobileSensor.setGatewayDeviceId(mobile.getId());
+		mobileSensor.setLatency(6.0); // latency of connection between EEG sensors and the parent Smartphone is 6 ms
+		mobileDisplay.setGatewayDeviceId(mobile.getId());
+		mobileDisplay.setLatency(1.0); // latency of connection between Display actuator and the parent Smartphone is 1
+										// ms
+		return mobile;
+	}
+
+	/**
 	 * Creates a vanilla fog device
 	 *
 	 * @param nodeName    name of the device to be used in simulation
@@ -236,13 +249,14 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 	 * @param ram         RAM
 	 * @param upBw        uplink bandwidth
 	 * @param downBw      downlink bandwidth
+	 * @param level       hierarchy level of the device
 	 * @param ratePerMips cost rate per MIPS used
 	 * @param busyPower
 	 * @param idlePower
 	 * @return
 	 */
-	private static MicroserviceFogDevice createFogDevice(String nodeName, long mips, int ram, long upBw, long downBw,
-			double ratePerMips, double busyPower, double idlePower, String deviceType) {
+	private static FogDevice createFogDevice(String nodeName, long mips, int ram, long upBw, long downBw,
+			double ratePerMips, double busyPower, double idlePower) {
 
 		List<Pe> peList = new ArrayList<Pe>();
 
@@ -262,7 +276,7 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 		String arch = "x86"; // system architecture
 		String os = "Linux"; // operating system
 		String vmm = "Xen";
-		double time_zone = -3.0; // time zone this resource located
+		double time_zone = -3; // time zone this resource located
 		double cost = 3.0; // the cost of using processing in this resource
 		double costPerMem = 0.05; // the cost of using memory in this resource
 		double costPerStorage = 0.001; // the cost of using storage in this
@@ -274,39 +288,25 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 		FogDeviceCharacteristics characteristics = new FogDeviceCharacteristics(arch, os, vmm, host, time_zone, cost,
 				costPerMem, costPerStorage, costPerBw);
 
-		MicroserviceFogDevice fogdevice = null;
+		FogDevice fogdevice = null;
 		try {
-			fogdevice = new MicroserviceFogDevice(nodeName, characteristics, new AppModuleAllocationPolicy(hostList),
-					storageList, 10, upBw, downBw, 10000, 0, ratePerMips, deviceType);
+			fogdevice = new FogDevice(nodeName, characteristics, new AppModuleAllocationPolicy(hostList), storageList,
+					10, upBw, downBw, 0, ratePerMips);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		// fogdevice.setLevel(level);
 		return fogdevice;
 	}
 
-	private static FogDevice addMobile(String name, int userId, Application app, int parentId) {
-		FogDevice mobile = createFogDevice(name, 200, 2048, 10000, 270, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
-		mobile.setParentId(parentId);
-		Sensor mobileSensor = new Sensor("sensor-" + name, "SENSOR", userId, app.getAppId(),
-				new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor
-																			// follows a deterministic distribution
-		mobileSensor.setApp(app);
-		sensors.add(mobileSensor);
-		Actuator mobileDisplay = new Actuator("actuator-" + name, userId, app.getAppId(), "DISPLAY");
-		actuators.add(mobileDisplay);
-
-		mobileSensor.setGatewayDeviceId(mobile.getId());
-		mobileSensor.setLatency(6.0); // latency of connection between sensors and the parent Smartphone is 6 ms
-
-		mobileDisplay.setGatewayDeviceId(mobile.getId());
-		mobileDisplay.setLatency(1.0); // latency of connection between Display actuator and the parent Smartphone is 1
-										// ms
-		mobileDisplay.setApp(app);
-
-		return mobile;
-	}
-
+	/**
+	 * Function to create the EEG Tractor Beam game application in the DDF model.
+	 *
+	 * @param appId  unique identifier of the application
+	 * @param userId identifier of the user of the application
+	 * @return
+	 */
 	@SuppressWarnings({ "serial" })
 	private static Application createApplication(String appId, int userId) {
 
@@ -360,13 +360,6 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 				new FractionalSelectivity(1.0));
 
 		application.setSpecialPlacementInfo("database", "cloud");
-
-		if (CLOUD) {
-			application.setSpecialPlacementInfo("kalman_filter", "cloud");
-			application.setSpecialPlacementInfo("distance_calc", "cloud");
-			application.setSpecialPlacementInfo("trilateration", "cloud");
-			application.setSpecialPlacementInfo("position_estim", "cloud");
-		}
 
 		final AppLoop loop1 = new AppLoop(new ArrayList<String>() {
 			{

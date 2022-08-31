@@ -50,17 +50,29 @@ public class RandomMobilityGenerator {
 
 	private static boolean positionInRangeCheck(float x, float y) {
 
-		float p1X = -27.6003895f;
-		float p1Y = -48.518382f;
+		float p1X = -27.60038f;
+		float p1Y = -48.51859f;
 
-		float p3X = -27.6004055f;
-		float p3Y = -48.5182117f;
+		float p3X = -27.60045f;
+		float p3Y = -48.5185f;
 
-		float p5X = -27.6005065f;
-		float p5Y = -48.5181406f;
+		float p5X = -27.60077f;
+		float p5Y = -48.51867f;
 
-		float p6X = -27.6006044f;
-		float p6Y = -48.5182928f;
+		float p6X = -27.60072f;
+		float p6Y = -48.51878f;
+//
+//		float p1X = -27.6003895f;
+//		float p1Y = -48.518382f;
+//
+//		float p3X = -27.6004055f;
+//		float p3Y = -48.5182117f;
+//
+//		float p5X = -27.6005065f;
+//		float p5Y = -48.5181406f;
+//
+//		float p6X = -27.6006044f;
+//		float p6Y = -48.5182928f;
 
 		final Polygon2D polygon = new Polygon2D();
 		polygon.addPoint(p1X, p1Y);
@@ -122,19 +134,23 @@ public class RandomMobilityGenerator {
 			int low = 10;
 			int high = 100;
 			int result = rd.nextInt(high - low) + low;
-			
+
 			double positionX;
 			double positionY;
-			
-			if ((result % 2) == 0 ) {
-				positionX = References.north_reference[0];
-				positionY = References.north_reference[1];
+
+			if (References.is_ine_experiment) {
+				positionX = References.ine_starting_point_reference[0];
+				positionY = References.ine_starting_point_reference[1];
 			} else {
-				positionX = References.south_reference[0];
-				positionY = References.south_reference[1];
+				if ((result % 2) == 0) {
+					positionX = References.north_reference[0];
+					positionY = References.north_reference[1];
+				} else {
+					positionX = References.south_reference[0];
+					positionY = References.south_reference[1];
+				}
 			}
-			
-			
+
 			tempPositions.get(0).add(positionX);
 			tempPositions.get(0).add(positionY);
 

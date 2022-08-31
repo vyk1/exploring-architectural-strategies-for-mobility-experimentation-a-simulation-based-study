@@ -102,7 +102,7 @@ public class DataParser {
 
 		String[] edgeResources = new String[] { "4g1p1c", "4g2p1c", "8g2p1c", "8g3p1c", "12g2p1c", "12g3p1c", "16g3p1c",
 				"16g4p1c" };
-		int pos = 7;
+		int pos = 0;
 		BufferedReader csvReader = new BufferedReader(new FileReader(String.format(".%sdataset%sedgeResources%s%s.csv",
 				File.separator, File.separator, File.separator, edgeResources[pos])));
 		String row;
