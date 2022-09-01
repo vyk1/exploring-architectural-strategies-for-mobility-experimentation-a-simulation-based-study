@@ -34,7 +34,7 @@ public class References {
 					File.separator, File.separator);
 	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_",
 			File.separator, File.separator);
-	public static final int random_walk_mobility_model = 1;
+	public static final int random_walk_mobility_model = 2;
 	public static final int random_waypoint_mobility_model = 2;
 	public static double MinMobilitySpeed = 1; //
 	public static double MaxMobilitySpeed = 2; //
