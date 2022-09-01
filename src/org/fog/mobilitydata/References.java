@@ -13,11 +13,11 @@ public class References {
 
 	// Reference geographical information to create random mobility pattern for
 	// mobile users
-	
+
 	public static boolean is_ine_experiment = true;
 
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
-	
+
 	public static final double[] north_reference = { -27.6004, -48.51828 };
 
 	public static final double[] south_reference = { -27.60052, -48.5183 };
@@ -27,9 +27,11 @@ public class References {
 	// Reference dataset filename to store and retrieve users positions
 //	public static final String dataset_reference = String.format(".%sdataset%slocation%sstatic%susersLocation_", File.separator, File.separator, File.separator,
 //			File.separator);
-	public static final String dataset_reference = String.format(
-			".%sdataset%sofficial%seas%srandom_usersLocation-melbCBD_", File.separator, File.separator, File.separator,
-			File.separator);
+	public static final String dataset_reference = is_ine_experiment
+			? String.format(".%sdataset%sofficial%sine%srandom_usersLocation-melbCBD_", File.separator, File.separator,
+					File.separator, File.separator)
+			: String.format(".%sdataset%sofficial%sens%srandom_usersLocation-melbCBD_", File.separator, File.separator,
+					File.separator, File.separator);
 	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_",
 			File.separator, File.separator);
 	public static final int random_walk_mobility_model = 1;
