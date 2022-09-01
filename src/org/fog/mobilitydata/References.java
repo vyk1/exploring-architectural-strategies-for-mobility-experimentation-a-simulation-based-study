@@ -18,9 +18,8 @@ public class References {
 
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
 
-	public static final double[] north_reference = { -27.6004, -48.51828 };
-
-	public static final double[] south_reference = { -27.60052, -48.5183 };
+//	[north reference, south reference]
+	public static final double[][] ens_starting_point_references = { { -27.6004, -48.51828 }, { -27.60052, -48.5183 } };
 
 	public static final String output_path_data = String.format(".%sdataset%soutput_path_data.csv", File.separator,
 			File.separator);

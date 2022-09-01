@@ -142,13 +142,9 @@ public class RandomMobilityGenerator {
 				positionX = References.ine_starting_point_reference[0];
 				positionY = References.ine_starting_point_reference[1];
 			} else {
-				if ((result % 2) == 0) {
-					positionX = References.north_reference[0];
-					positionY = References.north_reference[1];
-				} else {
-					positionX = References.south_reference[0];
-					positionY = References.south_reference[1];
-				}
+				int position = result % 2;
+				positionX = References.ens_starting_point_references[position][0];
+				positionY = References.ens_starting_point_references[position][1];
 			}
 
 			tempPositions.get(0).add(positionX);
