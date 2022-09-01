@@ -53,7 +53,7 @@ public class IPA_Mobility_6Modules {
     
     static int CLOUD_USERS = 1;
     static double SENSOR_TRANSMISSION_TIME = 10;
-    static int numberOfMobileUser = 10;
+    static int numberOfMobileUser = 1;
 //    static int numberOfMobileUser = 15;
 //    static int numberOfMobileUser = 5;
 

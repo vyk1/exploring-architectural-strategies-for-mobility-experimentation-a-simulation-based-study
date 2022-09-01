@@ -180,7 +180,7 @@ public class RandomMobilityGenerator {
 					this.directionFlag = true;
 				}
 				double mobilitySpeed = (double) (getRandomNumberInRange((int) References.MinMobilitySpeed * 100,
-						(int) References.MaxMobilitySpeed * 100)) / 1000; // meter/seconds
+						(int) References.MaxMobilitySpeed * 100)) / 100; // meter/seconds
 				tempPositions.add(new ArrayList<Double>());
 
 				// positionX = positionX + (double) (Math.cos(Math.toRadians(angle)) * speed) *
