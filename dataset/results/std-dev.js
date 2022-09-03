@@ -5,7 +5,11 @@ const path = require('path');
 const fs = require('fs');
 //joining path of directory 
 //const directoryPath = path.join(__dirname, dirPath);
-const directoryPath = "25-users/clustered"
+const experimentEnv = "ine"
+const userQtd = "5-users"
+const experimentType = "clustered"
+
+const directoryPath = experimentEnv + "/" + userQtd + "/" + experimentType
 //const directoryPath = "./25-users/edgeward"
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function(err, files) {
@@ -16,7 +20,7 @@ fs.readdir(directoryPath, function(err, files) {
 	//listing all files using forEach
 	files.forEach(function(file) {
 		let fullPath = directoryPath + "/" + file
-		console.log("reading" + fullPath)
+		console.log("reading " + fullPath)
 		readCsvFile(fullPath)
 	});
 });
@@ -41,7 +45,7 @@ function dev(arr) {
 	let sum = arr.reduce((acc, curr) => acc + curr, 0);
 
 	// Calculating the variance
-	let variance = sum / arr.length
+	// let variance = sum / arr.length
 
 	// Returning the Standered deviation
 	return [twoDecimal(mean), twoDecimal(Math.sqrt(sum / arr.length))]
@@ -63,10 +67,10 @@ function readCsvFile(filename) {
 		let mtArr = []
 
 		for (let i = 0; i < dataArray.length; i++) {
-			aldArr.push(Number(dataArray[i].split(";")[0].replace(",", ".")))
-			cicArr.push(Number(dataArray[i].split(";")[1].replace(",", ".")))
-			nuArr.push(Number(dataArray[i].split(";")[2].replace(",", ".")))
-			mtArr.push(Number(dataArray[i].split(";")[3].replace(",", ".")))
+			aldArr.push(twoDecimal(Number(dataArray[i].split(";")[0])))
+			cicArr.push(twoDecimal(Number(dataArray[i].split(";")[1])))
+			nuArr.push(twoDecimal(Number(dataArray[i].split(";")[2])))
+			mtArr.push(twoDecimal(Number(dataArray[i].split(";")[3])))
 		}
 
 		let devA = dev(aldArr)
@@ -74,9 +78,11 @@ function readCsvFile(filename) {
 		let devN = dev(nuArr)
 		let devM = dev(mtArr)
 
-		let str = filename + " " + devA[0] + " " + devA[1] + devC[0] + " " + devC[1] + devN[0] + " " + devN[1] + devM[0] + " " + devM[1] + "\n"
+		let str = filename + " " + devA[0] + " " + devA[1] + " " + devC[0] + " " + devC[1] + " " + devN[0] + " " + devN[1] + " " + devM[0] + " " + devM[1] + "\n"
 
-		fs.appendFileSync(directoryPath + ".csv", str)
+		let csvFilename = directoryPath + ".csv"
+		fs.appendFileSync(csvFilename, str)
+		console.log("wrote @ " + csvFilename)
 
 	});
 }
