@@ -5,9 +5,9 @@ const path = require('path');
 const fs = require('fs');
 //joining path of directory 
 //const directoryPath = path.join(__dirname, dirPath);
-const experimentEnv = "ine"
+const experimentEnv = "ens"
 const userQtd = "5-users"
-const experimentType = "edgeward"
+const experimentType = "clustered"
 
 const directoryPath = experimentEnv + "/" + userQtd + "/" + experimentType
 //const directoryPath = "./25-users/edgeward"
