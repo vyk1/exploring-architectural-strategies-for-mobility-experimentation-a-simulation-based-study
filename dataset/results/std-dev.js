@@ -7,7 +7,7 @@ const fs = require('fs');
 //const directoryPath = path.join(__dirname, dirPath);
 const experimentEnv = "ine"
 const userQtd = "5-users"
-const experimentType = "clustered"
+const experimentType = "edgeward"
 
 const directoryPath = experimentEnv + "/" + userQtd + "/" + experimentType
 //const directoryPath = "./25-users/edgeward"
@@ -78,7 +78,10 @@ function readCsvFile(filename) {
 		let devN = dev(nuArr)
 		let devM = dev(mtArr)
 
-		let str = filename + " " + devA[0] + " " + devA[1] + " " + devC[0] + " " + devC[1] + " " + devN[0] + " " + devN[1] + " " + devM[0] + " " + devM[1] + "\n"
+		//let header = "filename ald aldstd cic cicstd nu nustd mt mtstd\n"
+		let content = filename + " " + devA[0] + " " + devA[1] + " " + devC[0] + " " + devC[1] + " " + devN[0] + " " + devN[1] + " " + devM[0] + " " + devM[1] + "\n"
+
+		let str = content
 
 		let csvFilename = directoryPath + ".csv"
 		fs.appendFileSync(csvFilename, str)
