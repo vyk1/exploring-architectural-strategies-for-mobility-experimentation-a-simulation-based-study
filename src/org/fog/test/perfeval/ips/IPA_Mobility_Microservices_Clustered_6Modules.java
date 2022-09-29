@@ -71,8 +71,7 @@ public class IPA_Mobility_Microservices_Clustered_6Modules {
 	static int CLOUD_USERS = 1;
 	static double SENSOR_TRANSMISSION_TIME = 10;
 	static int numberOfMobileUser = 25;
-//  static int numberOfMobileUser = 15;
-//  static int numberOfMobileUser = 5;
+//	static int numberOfMobileUser = 5;
 	static Double clusterLatency = 2.0; // cluster link latency 2ms
 
 	// if random mobility generator for users is True, new random dataset will be
