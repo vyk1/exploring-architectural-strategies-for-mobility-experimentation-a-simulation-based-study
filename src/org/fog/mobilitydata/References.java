@@ -14,7 +14,7 @@ public class References {
 	// Reference geographical information to create random mobility pattern for
 	// mobile users
 
-	public static boolean is_ine_experiment = true;
+	public static boolean is_ine_experiment = false;
 
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
 
