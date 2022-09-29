@@ -1,4 +1,4 @@
-Latitude,Longitude,Block,Level,Parent,State,Details
+ID,Latitude,Longitude,Block,Level,Parent,State,Details
 0,-27.6007311,-48.51867,0,0,-1,VIC,cloud
 7,-27.6006635,-48.5186908,1,2,1,VIC,gateway
 18,-27.6005045,-48.518554,1,2,1,VIC,gateway
