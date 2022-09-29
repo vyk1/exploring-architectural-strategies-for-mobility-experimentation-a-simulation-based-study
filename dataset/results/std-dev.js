@@ -10,7 +10,7 @@ const userQtd = ["5-users", "25-users"]
 const experimentType = ["clustered", "edgeward"]
 const exp2 = ["", "exp2"]
 
-const directoryPath = experimentEnv[0] + "/" + userQtd[1] + "/" + experimentType[1] + "/" + exp2[1]
+const directoryPath = experimentEnv[1] + "/" + userQtd[1] + "/" + experimentType[1] + "/" + exp2[1]
 //const directoryPath = "./25-users/edgeward"
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function(err, files) {
