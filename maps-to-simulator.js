@@ -22,18 +22,18 @@ function readCsvFile(filename) {
         for (let i = 0; i < dataArray.length; i++) {
             let line = dataArray[i]
             let parenthesisIndex = line.indexOf(")")
-            let ll = line.substring(0, parenthesisIndex).replace("(", "").replace("POINT ", "").replace(")", "").split(" ")
+            let ll = line.substring(1, parenthesisIndex).replace("(", "").replace("POINT ", "").replace(")", "").split(" ")
 
-            let lat = ll[0]
-            let lon = ll[1]
+            let lat = ll[1]
+            let lon = ll[0]
             let block = line.match(/(?<=(Ponto \d{1,}),).*/)[0]
             let details = "Block " + block + " Gateway"
 
             // EVERY NODE IS DEFINED AS STANDARD GATEWAY (LV=2, PARENT=1)
             content += i + SEPARATOR + lat + SEPARATOR + lon + SEPARATOR + block + SEPARATOR + "2" + SEPARATOR + "1" + SEPARATOR + "VIC" + SEPARATOR + details + "\n"
         }
-        let str = HEADER + content
 
+        let str = HEADER + content
 
         fs.appendFileSync(NEW_FILE_FILENAME, str)
         console.log("wrote @ " + NEW_FILE_FILENAME)
