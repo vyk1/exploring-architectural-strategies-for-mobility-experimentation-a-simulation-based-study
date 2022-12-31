@@ -6,7 +6,3 @@
 
 
 Please refer to the [cheats file](cheats.md) for further cheats (:
-
-
-  
-
