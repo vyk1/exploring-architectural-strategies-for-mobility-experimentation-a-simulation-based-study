@@ -25,7 +25,7 @@ function readCsvFile(filename) {
             let line = dataArray[i]
             let ll = line.match(/(?<=(POINT \()).*(?=\))/)[0]
             ll.replace(")", "")
-            let [lat, lon] = ll.split(" ")
+            let [lon, lat] = ll.split(" ")
 
             content += lat + SEPARATOR + lon + "\n"
         }
