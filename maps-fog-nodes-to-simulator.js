@@ -33,8 +33,8 @@ function readCsvFile(filename) {
             let parenthesisIndex = line.indexOf(")")
             let ll = line.substring(1, parenthesisIndex).replace("(", "").replace("POINT ", "").replace(")", "").split(" ")
 
-            let lat = ll[1]
-            let lon = ll[0]
+            let [lon, lat] = ll
+
             let block = line.match(/(?<=(Ponto \d{1,}),).*/)[0]
             let details = "Block " + block + " Gateway"
 
