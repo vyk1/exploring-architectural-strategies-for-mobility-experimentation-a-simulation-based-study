@@ -16,6 +16,12 @@ public class References {
 
 	public static boolean is_ine_experiment = false;
 
+	public static boolean is_ufsc_experiment = false;
+
+	public static boolean is_ops_experiment = false;
+
+	public static String[] comparative_mobility_patterns = { "1", "2", "3" };
+
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
 
 //	[north reference, south reference]
@@ -26,11 +32,20 @@ public class References {
 	// Reference dataset filename to store and retrieve users positions
 //	public static final String dataset_reference = String.format(".%sdataset%slocation%sstatic%susersLocation_", File.separator, File.separator, File.separator,
 //			File.separator);
-	public static final String dataset_reference = is_ine_experiment
-			? String.format(".%sdataset%sofficial%sine%srandom_usersLocation-melbCBD_", File.separator, File.separator,
-					File.separator, File.separator)
-			: String.format(".%sdataset%sofficial%sens%srandom_usersLocation-melbCBD_", File.separator, File.separator,
-					File.separator, File.separator);
+	public static final String dataset_reference = is_ufsc_experiment
+			? is_ine_experiment
+					? String.format(".%sdataset%sofficial%sine%srandom_usersLocation-melbCBD_", File.separator,
+							File.separator, File.separator, File.separator)
+					: String.format(".%sdataset%sofficial%sens%srandom_usersLocation-melbCBD_", File.separator,
+							File.separator, File.separator, File.separator)
+			: is_ops_experiment
+					? String.format(".%sdataset%sofficial%scomparative%sops%s%s%susersLocation-melbCBD_",
+							File.separator, File.separator, File.separator, File.separator, File.separator,
+							comparative_mobility_patterns[0], File.separator)
+					: String.format(".%sdataset%sofficial%scomparative%sips%s%s%susersLocation-melbCBD_",
+							File.separator, File.separator, File.separator, File.separator, File.separator,
+							comparative_mobility_patterns[0], File.separator);
+
 	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_",
 			File.separator, File.separator);
 	public static final int random_walk_mobility_model = 2;

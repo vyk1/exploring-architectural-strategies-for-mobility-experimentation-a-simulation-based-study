@@ -100,21 +100,42 @@ public class DataParser {
 		for (int i = 0; i < numOfLevels; i++)
 			resouresOnLevels[i] = new ArrayList<String>();
 
+		String directory = new String();
+		int pos = 0;
+		String[] edgeResources = new String[] {};
+		String[] edgeResources2 = new String[] {};
+
 		String edgeResourcesDir;
-		if (References.is_ine_experiment) {
-			edgeResourcesDir = "ine";
+		if (References.is_ufsc_experiment) {
+
+			if (References.is_ine_experiment) {
+				edgeResourcesDir = "ine";
+			} else {
+				edgeResourcesDir = "ens";
+			}
+			// 8 datasets
+			edgeResources = new String[] { "4g1p1c", "4g2p1c", "8g2p1c", "8g3p1c", "12g2p1c", "12g3p1c", "16g3p1c",
+					"16g4p1c" };
+			edgeResources2 = new String[] { "20-1", "20-2", "20-3", "20-4" };
+
+			directory = String.format(".%sdataset%sedgeResources%s%s%s%s.csv", File.separator, File.separator,
+					File.separator, edgeResourcesDir, File.separator, edgeResources2[pos]);
 		} else {
-			edgeResourcesDir = "ens";
+			// 3 total datasets
+			if (References.is_ops_experiment) {
+				edgeResourcesDir = "ops";
+				edgeResources = new String[] { "130-6" };
+			} else {
+				edgeResourcesDir = "ips";
+				edgeResources = new String[] { "4-2", "2-1" };
+			}
+
+			directory = String.format(".%sdataset%sedgeResources%scomparative%s%s%s%s.csv", File.separator,
+					File.separator, File.separator, File.separator, edgeResourcesDir, File.separator,
+					edgeResources[pos]);
 		}
 
-		// 8 datasets
-		String[] edgeResources = new String[] { "4g1p1c", "4g2p1c", "8g2p1c", "8g3p1c", "12g2p1c", "12g3p1c", "16g3p1c",
-				"16g4p1c" };
-		String[] edgeResources2 = new String[] { "20-1", "20-2", "20-3", "20-4" };
-		int pos = 3;
-		BufferedReader csvReader = new BufferedReader(
-				new FileReader(String.format(".%sdataset%sedgeResources%s%s%s%s.csv", File.separator, File.separator,
-						File.separator, edgeResourcesDir, File.separator, edgeResources2[pos])));
+		BufferedReader csvReader = new BufferedReader(new FileReader(directory));
 		String row;
 		while ((row = csvReader.readLine()) != null) {
 			String[] data = row.split(",");
