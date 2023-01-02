@@ -1,0 +1,7 @@
+ID,Latitude,Longitude,Block,Level,Parent,State,Details
+0,-27.600469,-48.5182707,0,0,-1,VIC,cloud
+1,-27.6004237,-48.5183383,1,1,0,VIC,proxy
+3,-27.6004232,-48.5182375,1,2,1,VIC,gateway
+6,-27.6004975,-48.5181835,1,2,1,VIC,gateway
+10,-27.6004971,-48.5182503,1,2,1,VIC,gateway
+5,-27.6005311,-48.5183129,1,2,1,VIC,gateway

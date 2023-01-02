@@ -1,0 +1,6 @@
+ID,Latitude,Longitude,Block,Level,Parent,State,Details
+0,-37.813329,144.9528916,0,0,-1,VIC,Data Center
+1,-37.8133123,144.9517062,1,1,0,VIC,Block 1 Proxy
+2,-37.812679,144.9537837,2,1,0,VIC,Block 2 Proxy
+3,-37.8139885,144.9520403,1,2,1,VIC,Block 1 Gateway
+4,-37.8135326,144.9540557,2,2,2,VIC,Block 2 Gateay
