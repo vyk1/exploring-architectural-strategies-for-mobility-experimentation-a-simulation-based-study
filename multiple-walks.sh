@@ -1,7 +1,7 @@
 
-source="2.csv"
+source="3.csv"
 
-destination="dataset/official/comparative/ops/2/"
+destination="dataset/official/comparative/ops/3/"
 
 cd $destination
 
