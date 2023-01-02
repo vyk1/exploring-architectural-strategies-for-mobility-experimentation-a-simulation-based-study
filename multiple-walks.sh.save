@@ -1,0 +1,20 @@
+
+source="ips2.csv"
+
+destination="dataset/official/comparative/2/"
+
+cd dataset
+cd official
+cd comparative
+cd 2
+
+pwd
+
+cat $source
+
+for i in {1..2}
+do
+    cat $source >> "${destination}usersLocati#on-melbCBD_${i}.csv"
+done
+
+echo ls -1q log* | wc -l

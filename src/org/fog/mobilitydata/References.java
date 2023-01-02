@@ -20,7 +20,7 @@ public class References {
 
 	public static boolean is_ops_experiment = false;
 
-	private static int comparative_mobility_patterns_position = 0;
+	private static int comparative_mobility_patterns_position = 1;
 	public static String[] comparative_mobility_patterns = { "1", "2", "3" };
 
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
