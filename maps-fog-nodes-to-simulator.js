@@ -2,12 +2,12 @@
 
 const fs = require('fs');
 
-let targetFile = "file.csv"
+let targetFile = "sample.csv"
 
 const HEADER = "ID,Latitude,Longitude,Block,Level,Parent,State,Details\n"
 const CLOUD = "0,-37.8136,144.9631,0,0,-1,VIC,Cloud Data Center\n"
 const SEPARATOR = ","
-const NEW_FILE_FILENAME = 'new1.csv'
+const NEW_FILE_FILENAME = 'converted.csv'
 
 const GATEWAY_ID_LEVEL = "2"
 const PROXY_ID_LEVEL = "1"
