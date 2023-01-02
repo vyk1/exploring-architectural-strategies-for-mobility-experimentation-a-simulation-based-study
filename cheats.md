@@ -1,5 +1,6 @@
 # Useful Cheats (hopefully)
 
+Commands? Please refer to [here](commands.md)
 
 ## Converting GMaps markers to iFogSim?
 

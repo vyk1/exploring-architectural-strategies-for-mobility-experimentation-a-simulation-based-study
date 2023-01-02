@@ -101,7 +101,7 @@ public class DataParser {
 			resouresOnLevels[i] = new ArrayList<String>();
 
 		String directory = new String();
-		int pos = 0;
+		int edgeResourcesTopologyPosition = 0;
 		String[] edgeResources = new String[] {};
 		String[] edgeResources2 = new String[] {};
 
@@ -119,7 +119,7 @@ public class DataParser {
 			edgeResources2 = new String[] { "20-1", "20-2", "20-3", "20-4" };
 
 			directory = String.format(".%sdataset%sedgeResources%s%s%s%s.csv", File.separator, File.separator,
-					File.separator, edgeResourcesDir, File.separator, edgeResources2[pos]);
+					File.separator, edgeResourcesDir, File.separator, edgeResources2[edgeResourcesTopologyPosition]);
 		} else {
 			// 3 total datasets
 			if (References.is_ops_experiment) {
@@ -132,7 +132,7 @@ public class DataParser {
 
 			directory = String.format(".%sdataset%sedgeResources%scomparative%s%s%s%s.csv", File.separator,
 					File.separator, File.separator, File.separator, edgeResourcesDir, File.separator,
-					edgeResources[pos]);
+					edgeResources[edgeResourcesTopologyPosition]);
 		}
 
 		BufferedReader csvReader = new BufferedReader(new FileReader(directory));

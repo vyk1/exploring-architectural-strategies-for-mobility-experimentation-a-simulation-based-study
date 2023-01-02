@@ -20,6 +20,7 @@ public class References {
 
 	public static boolean is_ops_experiment = false;
 
+	private static int comparative_mobility_patterns_position = 0;
 	public static String[] comparative_mobility_patterns = { "1", "2", "3" };
 
 	public static final double[] ine_starting_point_reference = { -27.60057f, -48.51859f };
@@ -41,10 +42,10 @@ public class References {
 			: is_ops_experiment
 					? String.format(".%sdataset%sofficial%scomparative%sops%s%s%susersLocation-melbCBD_",
 							File.separator, File.separator, File.separator, File.separator, File.separator,
-							comparative_mobility_patterns[0], File.separator)
+							comparative_mobility_patterns[comparative_mobility_patterns_position], File.separator)
 					: String.format(".%sdataset%sofficial%scomparative%sips%s%s%susersLocation-melbCBD_",
 							File.separator, File.separator, File.separator, File.separator, File.separator,
-							comparative_mobility_patterns[0], File.separator);
+							comparative_mobility_patterns[comparative_mobility_patterns_position], File.separator);
 
 	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_",
 			File.separator, File.separator);
