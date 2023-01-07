@@ -37,8 +37,8 @@ function readCsvFile(filename) {
 
             let block = line.match(/(?<=(Ponto \d{1,}),).*/)[0]
             let details = "Block " + block + " Gateway"
-
-            content = lat + SEPARATOR + lon + SEPARATOR + block + SEPARATOR + GATEWAY_ID_LEVEL + SEPARATOR + PROXY_ID_LEVEL + SEPARATOR + "VIC" + SEPARATOR + details + "\n"
+            // For the gateways, the parent level should be the same as the corresponding proxy (aka block id)
+            content = lat + SEPARATOR + lon + SEPARATOR + block + SEPARATOR + GATEWAY_ID_LEVEL + SEPARATOR + block + SEPARATOR + "VIC" + SEPARATOR + details + "\n"
             array[block] == null ? array[block] = [content] : array[block].push(content)
         }
 
@@ -47,7 +47,7 @@ function readCsvFile(filename) {
         let str = HEADER + CLOUD + everything.toString()
 
         fs.appendFileSync(NEW_FILE_FILENAME, str)
-        console.log("wrote @ " + NEW_FILE_FILENAME)
+        console.log("Written @ " + NEW_FILE_FILENAME)
     })
 }
 
