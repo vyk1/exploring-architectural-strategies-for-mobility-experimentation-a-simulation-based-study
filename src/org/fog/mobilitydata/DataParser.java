@@ -121,10 +121,10 @@ public class DataParser {
 			directory = String.format(".%sdataset%sedgeResources%s%s%s%s.csv", File.separator, File.separator,
 					File.separator, edgeResourcesDir, File.separator, edgeResources2[edgeResourcesTopologyPosition]);
 		} else {
-			// 3 total datasets
+			// 4 total datasets
 			if (References.is_ops_experiment) {
 				edgeResourcesDir = "ops";
-				edgeResources = new String[] { "130-16" };
+				edgeResources = new String[] { "130-16", "130-8" };
 			} else {
 				edgeResourcesDir = "ips";
 				edgeResources = new String[] { "4-2", "2-1" };
