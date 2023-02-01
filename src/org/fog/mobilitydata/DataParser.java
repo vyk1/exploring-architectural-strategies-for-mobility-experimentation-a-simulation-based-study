@@ -101,7 +101,7 @@ public class DataParser {
 			resouresOnLevels[i] = new ArrayList<String>();
 
 		String directory = new String();
-		int edgeResourcesTopologyPosition = 1;
+		int edgeResourcesTopologyPosition = 2;
 		String[] edgeResources = new String[] {};
 		String[] edgeResources2 = new String[] {};
 
