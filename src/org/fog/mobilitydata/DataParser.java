@@ -124,7 +124,7 @@ public class DataParser {
 			// 4 total datasets
 			if (References.is_ops_experiment) {
 				edgeResourcesDir = "ops";
-				edgeResources = new String[] { "130-16", "130-8" };
+				edgeResources = new String[] { "130-16", "66-8", "66-1" };
 			} else {
 				edgeResourcesDir = "ips";
 				edgeResources = new String[] { "4-2", "2-1" };
@@ -133,7 +133,7 @@ public class DataParser {
 			directory = String.format(".%sdataset%sedgeResources%scomparative%s%s%s%s.csv", File.separator,
 					File.separator, File.separator, File.separator, edgeResourcesDir, File.separator,
 					edgeResources[edgeResourcesTopologyPosition]);
-			
+
 		}
 
 		BufferedReader csvReader = new BufferedReader(new FileReader(directory));
