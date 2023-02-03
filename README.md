@@ -1,9 +1,8 @@
 ## Changes:
 
-- RandomMobilityGenerator
-- References: dataset references + north south
+- RandomMobilityGenerator: to enable IPS experiments with random movement generation
+- References: dataset references + north south and mobility patterns
 - DataParser: edge resources files
-
 
 Please refer to the [cheats file](cheats.md) for further cheats (:
 
