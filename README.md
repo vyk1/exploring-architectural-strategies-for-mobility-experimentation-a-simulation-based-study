@@ -4,6 +4,6 @@
 - References: dataset references + north south and mobility patterns
 - DataParser: edge resources files
 
-Please refer to the [cheats file](cheats.md) for further cheats (:
+Please refer to the [cheats file](/docs/cheats.md) for further cheats (:
 
-For the logging of the results, [click here](results-logging.md)
+For the logging of the results, [click here](/docs/results-logging.md)
