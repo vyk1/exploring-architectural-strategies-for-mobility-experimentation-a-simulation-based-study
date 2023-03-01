@@ -1,7 +1,7 @@
 ```mermaid
 sequenceDiagram
 
-title Edgewards Placement (vertical)
+title Edgewards Migration (vertical)
 
 participant C as Client
 participant G as Nearest Gateway

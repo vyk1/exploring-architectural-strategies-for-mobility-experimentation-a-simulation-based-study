@@ -9,4 +9,4 @@ Example from inside the `dataset/results/comparative/ips`:
 
 ### Multiplicating users?
 
-Use the bash file
+Use the bash file `multiple-walks.sh`
