@@ -9,13 +9,13 @@ document.querySelector('[name="nome"]').value="Victoria Botelho"
 document.querySelector('[name="sobrenome"]').value="Martins"
 document.querySelector('[name="titulo"]').value="Service placements, fog and mobility: a study towards the state of the art"
 document.querySelector('[value="dissertacao"]').click()
-// Adicionar programa
-// Adicionar centro
+// TODO: Adicionar programa
+// TODO: Adicionar centro
 document.querySelector('[name="nome_ori"]').value="Douglas Dyllon Jerônimo"
 document.querySelector('[name="sobrenome_ori"]').value="de Macedo"
 document.querySelector('[name="ano"]').value="2023"
-// Conferir quantidade de páginas
-document.querySelector('[name="pags"]').value="110"
+// NOTE: Conferir quantidade de páginas
+document.querySelector('[name="pags"]').value="117"
 document.querySelector('[name="assunto2"]').value="Computação Distribuída"
 document.querySelector('[name="assunto3"]').value="Fog Computing"
 document.querySelector('[name="assunto4"]').value="Mobilidade"
