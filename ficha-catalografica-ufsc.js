@@ -11,12 +11,12 @@ document.querySelector('[name="titulo"]').value="Service placements, fog and mob
 document.querySelector('[value="dissertacao"]').click()
 // TODO: Adicionar programa
 // TODO: Adicionar centro
-document.querySelector('[name="nome_ori"]').value="Douglas Dyllon Jerônimo"
+document.querySelector('[name="nome_ori"]').value="Douglas Dyllon Jeronimo"
 document.querySelector('[name="sobrenome_ori"]').value="de Macedo"
 document.querySelector('[name="ano"]').value="2023"
 // NOTE: Conferir quantidade de páginas
 document.querySelector('[name="pags"]').value="117"
-document.querySelector('[name="assunto2"]').value="Computação Distribuída"
+document.querySelector('[name="assunto2"]').value="Internet of Things"
 document.querySelector('[name="assunto3"]').value="Fog Computing"
 document.querySelector('[name="assunto4"]').value="Mobilidade"
 document.querySelector('[name="assunto5"]').value="Sistemas de Localização"
