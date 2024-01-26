@@ -3,7 +3,7 @@ This repository holds the most important experiments from my [Masters' Thesis](h
 
 Please, refer to the previous link for further information.
 
-## Changes from [v2.0.0](https://github.com/Cloudslab/iFogSim/releases/tag/v2.0.0):
+## Changes made from iFogSim[v2.0.0](https://github.com/Cloudslab/iFogSim/releases/tag/v2.0.0):
 
 ### New classes
 
