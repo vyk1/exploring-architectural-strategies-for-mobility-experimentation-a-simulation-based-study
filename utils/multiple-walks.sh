@@ -1,3 +1,6 @@
+: <<COMMENT
+Creates multiple copies of given user location dataset
+COMMENT
 
 source="3.csv"
 

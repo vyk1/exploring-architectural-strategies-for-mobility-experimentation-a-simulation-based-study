@@ -1,3 +1,7 @@
+/*
+Calculates the standard deviation inside the dir /dataset/results
+*/
+
 'use strict'
 
 //requiring path and fs modules
