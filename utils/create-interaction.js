@@ -1,3 +1,10 @@
+/**
+ * @author Victoria Botelho Martins
+ * 
+ * Creates user interaction given a file
+ * 
+ */
+
 'use strict'
 
 const fs = require('fs')

@@ -1,5 +1,9 @@
 /*
-Calculates the standard deviation inside the dir /dataset/results
+* @author Victoria Botelho Martins
+* Calculates the standard deviation inside the dir /dataset/results
+
+* Not really used for any experimentation
+* Made out of curiosity
 */
 
 'use strict'

@@ -1,6 +1,9 @@
-/* 
-File to fix gateways' parent_id to match their block 
-*/
+/**
+ * @author Victoria Botelho Martins
+ * 
+ * Fixes gateways' parent_id to match their block 
+ * 
+ */
 'use strict'
 
 const fs = require('fs');

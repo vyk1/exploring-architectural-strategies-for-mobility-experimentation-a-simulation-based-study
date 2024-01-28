@@ -1,3 +1,10 @@
+/**
+ * @author Victoria Botelho Martins
+ * 
+ * Converts target edge resource GMaps csv file to a readable iFogSim v2 edge resource file
+ * 
+ */
+
 'use strict'
 
 const fs = require('fs');

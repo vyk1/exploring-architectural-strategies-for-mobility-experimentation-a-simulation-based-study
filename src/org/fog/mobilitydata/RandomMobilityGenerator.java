@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  * @author Mohammad Goudarzi
+ * Edited by Victoria Martins 2023
  */
 public class RandomMobilityGenerator {
 	protected Map<Integer, List<Double>> mobilityPositions;

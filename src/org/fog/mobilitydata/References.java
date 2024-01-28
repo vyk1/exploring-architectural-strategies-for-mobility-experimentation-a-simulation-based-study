@@ -2,6 +2,10 @@ package org.fog.mobilitydata;
 
 import java.io.File;
 
+/*
+ * Edited by Victoria Martins 2023
+ */
+
 public class References {
 
 	public static final int NOT_SET = -1;

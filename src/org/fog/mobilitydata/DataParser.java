@@ -11,6 +11,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
+/*
+ * Edited by Victoria Martins 2023
+ */
+
 public class DataParser {
 	public Map<String, Location> resourceLocationData = new HashMap<String, Location>();
 	public Map<String, Integer> levelID = new HashMap<String, Integer>();

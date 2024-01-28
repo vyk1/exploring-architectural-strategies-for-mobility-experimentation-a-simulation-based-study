@@ -1,3 +1,10 @@
+/**
+ * @author Victoria Botelho Martins
+ * 
+ * Converts target user interaction GMaps csv file to a readable iFogSim v2 user interaction file
+ * 
+ */
+
 'use strict'
 
 const fs = require('fs');

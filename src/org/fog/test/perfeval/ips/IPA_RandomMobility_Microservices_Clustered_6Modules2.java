@@ -51,7 +51,7 @@ import org.json.simple.parser.ParseException;
  * 3. routing based on destination device id using service discovery.
  * 4. heterogeneity of device resources.
  *
- * @author Samodha Pallewatta
+ * @author Victoria Martins 2023
  */
 
 /**
